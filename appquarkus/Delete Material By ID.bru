@@ -1,0 +1,22 @@
+meta {
+  name: Delete Material By ID
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/materials/a24e04fe-9679-4de2-9519-1fe73385db14
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "materialName": "Porca"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

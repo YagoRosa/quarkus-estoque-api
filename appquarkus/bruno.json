@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "appquarkus",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

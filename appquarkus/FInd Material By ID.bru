@@ -1,0 +1,22 @@
+meta {
+  name: FInd Material By ID
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/materials/28b7c080-9ddd-4ecb-b1c5-db74cfdbbc02
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "materialName": "Porca"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
