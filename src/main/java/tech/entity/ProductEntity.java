@@ -1,5 +1,6 @@
 package tech.entity;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -10,12 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "materials")
-public class MaterialEntity extends PanacheEntityBase{
+@Table (name = "product")
+public class ProductEntity extends PanacheEntityBase{
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
-    public String materialName;
-    public Integer stockQuantity;
+    public String productName;
+    public BigDecimal productPrice;
 
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import tech.entity.MaterialEntity;
-import tech.exception.MaterialNotFoundExecption;
+import tech.exception.ResourceNotFoundException;
 
 @ApplicationScoped
 public class MaterialService {
@@ -21,7 +21,7 @@ public class MaterialService {
 
     public MaterialEntity findById(UUID materialid) {
         return (MaterialEntity) MaterialEntity.findByIdOptional(materialid)
-                .orElseThrow(MaterialNotFoundExecption::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     public MaterialEntity updateMaterial(UUID materialid, MaterialEntity materialEntity) {
@@ -29,7 +29,7 @@ public class MaterialService {
 
         material.materialName = materialEntity.materialName;
         material.stockQuantity = materialEntity.stockQuantity;
-        
+
         MaterialEntity.persist(material);
 
         return material;
