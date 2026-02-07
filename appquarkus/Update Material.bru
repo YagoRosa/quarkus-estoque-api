@@ -4,20 +4,16 @@ meta {
   seq: 5
 }
 
-get {
-  url: http://localhost:8080/materials?Page=0&Pagesize=10
+put {
+  url: http://localhost:8080/materials/8d6eb8a7-0c68-46b3-ad35-fa747073fe7b
   body: json
   auth: inherit
 }
 
-params:query {
-  Page: 0
-  Pagesize: 10
-}
-
 body:json {
   {
-    "materialName": "Porca"
+    "materialName": "Paaarafuso",
+    "stockQuantity": "100"
   }
 }
 

@@ -15,7 +15,7 @@ public class MaterialEntity extends PanacheEntityBase{
    @Id
    @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
-
     public String materialName;
+    public Integer stockQuantity;
 
 }

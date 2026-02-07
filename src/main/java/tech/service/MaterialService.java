@@ -28,7 +28,8 @@ public class MaterialService {
         var material = findById(materialid);
 
         material.materialName = materialEntity.materialName;
-
+        material.stockQuantity = materialEntity.stockQuantity;
+        
         MaterialEntity.persist(material);
 
         return material;
