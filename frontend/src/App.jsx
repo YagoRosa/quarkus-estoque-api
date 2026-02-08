@@ -4,6 +4,7 @@ import MainLayout from './components/layout/MainLayout';
 import DashboardPage from './pages/DashboardPage';
 import MaterialsPage from './pages/MaterialsPage';
 import ProductsPage from './pages/ProductsPage';
+import AboutPage from './pages/AboutPage';
 import './index.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             path="/products"
             element={<ProductsPage refreshToggle={refreshToggle} onRefresh={handleRefresh} />}
           />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </MainLayout>
     </Router>
