@@ -185,8 +185,12 @@ button.btn-remove-recipe:hover {
 
 .action-buttons {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
+}
+
+button.btn-info {
+  background: var(--accent);
 }
 
 input {

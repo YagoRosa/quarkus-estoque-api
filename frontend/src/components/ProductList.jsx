@@ -133,13 +133,13 @@ const ProductList = ({ onProduce }) => {
                                 <td>{p.maxProductionQuantity}</td>
                                 <td>
                                     <div className="action-buttons">
+                                        <button onClick={() => handleProduce(p.id)}>Produce</button>
+                                        <button onClick={() => handleEditProduct(p)} className="btn-edit">Edit</button>
+                                        <button onClick={() => handleDeleteProduct(p.id)} className="btn-delete">Delete</button>
                                         <button onClick={() => toggleRecipe(p.id)} className="btn-secondary">
                                             {expandedRecipe === p.id ? 'Hide Recipe' : 'View Recipe'}
                                         </button>
-                                        <button onClick={() => handleProduce(p.id)}>Produce</button>
-                                        <button onClick={() => handleAddRecipe(p.id)} className="btn-secondary">+ Mat</button>
-                                        <button onClick={() => handleEditProduct(p)} className="btn-edit">Edit</button>
-                                        <button onClick={() => handleDeleteProduct(p.id)} className="btn-delete">Delete</button>
+                                        <button onClick={() => handleAddRecipe(p.id)} className="btn-secondary">+ Raw Material</button>
                                     </div>
 
                                     {expandedRecipe === p.id && (
