@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import MaterialList from './components/MaterialList'
-import ProductList from './components/ProductList'
-import MaterialForm from './components/MaterialForm'
-import ProductForm from './components/ProductForm'
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './components/layout/MainLayout';
+import DashboardPage from './pages/DashboardPage';
+import MaterialsPage from './pages/MaterialsPage';
+import ProductsPage from './pages/ProductsPage';
+import './index.css';
 
 function App() {
   const [refreshToggle, setRefreshToggle] = useState(false);
@@ -12,29 +14,22 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Sistema de Controle de Produção - MVP</h1>
-      <hr />
-
-      <section style={{ display: 'flex', gap: '20px' }}>
-        <div style={{ flex: 1 }}>
-          <MaterialForm onMaterialCreated={handleRefresh} />
-        </div>
-        <div style={{ flex: 1 }}>
-          <ProductForm onProductCreated={handleRefresh} />
-        </div>
-      </section>
-
-      <section style={{ display: 'flex', gap: '40px' }}>
-        <div style={{ flex: 1 }}>
-          <MaterialList key={`m-${refreshToggle}`} />
-        </div>
-        <div style={{ flex: 1 }}>
-          <ProductList key={`p-${refreshToggle}`} onProduce={handleRefresh} />
-        </div>
-      </section>
-    </div>
-  )
+    <Router>
+      <MainLayout>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route
+            path="/materials"
+            element={<MaterialsPage refreshToggle={refreshToggle} onRefresh={handleRefresh} />}
+          />
+          <Route
+            path="/products"
+            element={<ProductsPage refreshToggle={refreshToggle} onRefresh={handleRefresh} />}
+          />
+        </Routes>
+      </MainLayout>
+    </Router>
+  );
 }
 
-export default App
+export default App;

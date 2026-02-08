@@ -12,25 +12,25 @@ const MaterialList = () => {
             setMaterials(response.data);
             setLoading(false);
         } catch (err) {
-            setError('Erro ao carregar materiais.');
+            setError('Error loading materials.');
             setLoading(false);
         }
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Tem certeza que deseja excluir este material?')) return;
+        if (!window.confirm('Are you sure you want to delete this material?')) return;
         try {
             await api.delete(`/materials/${id}`);
             fetchMaterials();
         } catch (err) {
-            alert('Erro ao excluir: ' + (err.response?.data?.details || err.message));
+            alert('Deletion error: ' + (err.response?.data?.details || err.message));
         }
     };
 
     const handleEdit = async (m) => {
-        const newName = prompt('Novo nome do material:', m.materialName);
+        const newName = prompt('New material name:', m.materialName);
         if (newName === null) return;
-        const newQty = prompt('Nova quantidade em estoque:', m.stockQuantity);
+        const newQty = prompt('New stock quantity:', m.stockQuantity);
         if (newQty === null || isNaN(newQty)) return;
 
         try {
@@ -40,7 +40,7 @@ const MaterialList = () => {
             });
             fetchMaterials();
         } catch (err) {
-            alert('Erro ao editar: ' + (err.response?.data?.details || err.message));
+            alert('Editing error: ' + (err.response?.data?.details || err.message));
         }
     };
 
@@ -48,22 +48,22 @@ const MaterialList = () => {
         fetchMaterials();
     }, []);
 
-    if (loading) return <div>Carregando...</div>;
+    if (loading) return <div>Loading...</div>;
     if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
     return (
-        <div>
-            <h2>Materiais no Estoque</h2>
+        <div className="list-container">
+            <h3>Inventory Stock</h3>
             {materials.length === 0 ? (
-                <p>Nenhum material cadastrado.</p>
+                <p>No materials found.</p>
             ) : (
-                <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nome</th>
-                            <th>Estoque</th>
-                            <th>Ações</th>
+                            <th>Name</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,8 +73,8 @@ const MaterialList = () => {
                                 <td>{m.materialName}</td>
                                 <td>{m.stockQuantity}</td>
                                 <td>
-                                    <button onClick={() => handleEdit(m)} style={{ marginRight: '5px' }}>Editar</button>
-                                    <button onClick={() => handleDelete(m.id)} style={{ color: 'red' }}>Excluir</button>
+                                    <button onClick={() => handleEdit(m)}>Edit</button>
+                                    <button onClick={() => handleDelete(m.id)} className="btn-delete">Delete</button>
                                 </td>
                             </tr>
                         ))}

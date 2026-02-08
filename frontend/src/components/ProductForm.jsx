@@ -16,19 +16,19 @@ const ProductForm = ({ onProductCreated }) => {
             setName('');
             setPrice('');
             if (onProductCreated) onProductCreated();
-            alert('Produto cadastrado com sucesso!');
+            alert('Product registered successfully!');
         } catch (err) {
-            alert('Erro ao cadastrar produto: ' + (err.response?.data?.details || err.message));
+            alert('Error registering product: ' + (err.response?.data?.details || err.message));
         }
     };
 
     return (
-        <div style={{ marginBottom: '20px', padding: '15px', border: '1px solid #ddd' }}>
-            <h3>Cadastrar Novo Produto</h3>
+        <div className="form-container">
+            <h3>Register New Product</h3>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Nome do Produto"
+                    placeholder="Product Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -36,13 +36,12 @@ const ProductForm = ({ onProductCreated }) => {
                 <input
                     type="number"
                     step="0.01"
-                    placeholder="Preço"
+                    placeholder="Price"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
-                    style={{ marginLeft: '10px' }}
                 />
-                <button type="submit" style={{ marginLeft: '10px' }}>Salvar Produto</button>
+                <button type="submit">Save Product</button>
             </form>
         </div>
     );

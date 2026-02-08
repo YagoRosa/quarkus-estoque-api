@@ -12,34 +12,34 @@ const MaterialForm = ({ onMaterialCreated }) => {
                 materialName: name,
                 stockQuantity: parseInt(quantity)
             });
-            alert('Material criado!');
+            alert('Material created successfully!');
             setName('');
             setQuantity('');
             if (onMaterialCreated) onMaterialCreated();
         } catch (err) {
-            alert('Erro ao criar material.');
+            alert('Error creating material.');
         }
     };
 
     return (
-        <div style={{ padding: '20px', border: '1px solid #ccc', marginBottom: '20px' }}>
-            <h3>Cadastrar Novo Material</h3>
+        <div className="form-container">
+            <h3>Register New Material</h3>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Nome do Material"
+                    placeholder="Material Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
                 <input
                     type="number"
-                    placeholder="Quantidade Inicial"
+                    placeholder="Initial Quantity"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     required
                 />
-                <button type="submit">Cadastrar</button>
+                <button type="submit">Register</button>
             </form>
         </div>
     );
