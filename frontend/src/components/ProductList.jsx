@@ -3,17 +3,65 @@ import api from '../api/api';
 
 const ProductList = ({ onProduce }) => {
     const [products, setProducts] = useState([]);
+    const [recipes, setRecipes] = useState([]);
+    const [materials, setMaterials] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchProducts = async () => {
+    const fetchData = async () => {
         try {
-            const response = await api.get('/products');
-            setProducts(response.data);
+            const [prodRes, recRes, matRes] = await Promise.all([
+                api.get('/products'),
+                api.get('/recipes'),
+                api.get('/materials')
+            ]);
+            setProducts(prodRes.data);
+            setRecipes(recRes.data);
+            setMaterials(matRes.data);
             setLoading(false);
         } catch (err) {
-            setError('Erro ao carregar produtos.');
+            setError('Erro ao carregar dados.');
             setLoading(false);
+        }
+    };
+
+    const handleDeleteProduct = async (id) => {
+        if (!window.confirm('Excluir este produto?')) return;
+        try {
+            await api.delete(`/products/${id}`);
+            fetchData();
+        } catch (err) {
+            alert('Erro ao excluir produto.');
+        }
+    };
+
+    const handleDeleteRecipe = async (id) => {
+        if (!window.confirm('Remover este item da receita?')) return;
+        try {
+            await api.delete(`/recipes/${id}`);
+            fetchData();
+            if (onProduce) onProduce();
+        } catch (err) {
+            alert('Erro ao remover item da receita.');
+        }
+    };
+
+    const handleAddRecipe = async (productId) => {
+        const matId = prompt('ID do Material (copie da tabela de materiais):');
+        if (!matId) return;
+        const qty = prompt('Quantidade necessária para 1 unidade:');
+        if (!qty || isNaN(qty)) return;
+
+        try {
+            await api.post('/recipes', {
+                product: { id: productId },
+                material: { id: matId },
+                quantity: parseFloat(qty)
+            });
+            fetchData();
+            if (onProduce) onProduce();
+        } catch (err) {
+            alert('Erro ao vincular material.');
         }
     };
 
@@ -31,7 +79,7 @@ const ProductList = ({ onProduce }) => {
     };
 
     useEffect(() => {
-        fetchProducts();
+        fetchData();
     }, []);
 
     if (loading) return <div>Carregando...</div>;
@@ -61,7 +109,18 @@ const ProductList = ({ onProduce }) => {
                                 <td>{p.stockQuantity || 0}</td>
                                 <td>{p.maxProductionQuantity}</td>
                                 <td>
-                                    <button onClick={() => handleProduce(p.id)}>Produzir</button>
+                                    <div style={{ fontSize: '0.8em', marginBottom: '5px' }}>
+                                        <strong>Receita:</strong>
+                                        {recipes.filter(r => r.product.id === p.id).map(r => (
+                                            <div key={r.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <span>• {r.material.materialName}: {r.quantity}</span>
+                                                <button onClick={() => handleDeleteRecipe(r.id)} style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer', padding: '0 5px' }}>x</button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <button onClick={() => handleProduce(p.id)} style={{ marginRight: '5px' }}>Produzir</button>
+                                    <button onClick={() => handleAddRecipe(p.id)} style={{ marginRight: '5px', fontSize: '0.8em' }}>+ Insumo</button>
+                                    <button onClick={() => handleDeleteProduct(p.id)} style={{ color: 'red', fontSize: '0.8em' }}>Excluir</button>
                                 </td>
                             </tr>
                         ))}

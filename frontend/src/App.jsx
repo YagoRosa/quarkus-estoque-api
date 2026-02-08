@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import MaterialList from './components/MaterialList'
 import ProductList from './components/ProductList'
 import MaterialForm from './components/MaterialForm'
+import ProductForm from './components/ProductForm'
 
 function App() {
   const [refreshToggle, setRefreshToggle] = useState(false);
@@ -15,8 +16,13 @@ function App() {
       <h1>Sistema de Controle de Produção - MVP</h1>
       <hr />
 
-      <section>
-        <MaterialForm onMaterialCreated={handleRefresh} />
+      <section style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ flex: 1 }}>
+          <MaterialForm onMaterialCreated={handleRefresh} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <ProductForm onProductCreated={handleRefresh} />
+        </div>
       </section>
 
       <section style={{ display: 'flex', gap: '40px' }}>
