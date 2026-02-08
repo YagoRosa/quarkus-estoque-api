@@ -15,11 +15,13 @@ const AboutPage = () => {
                 </div>
 
                 <div className="stat-card">
-                    <h3>Technologies</h3>
+                    <h3>Technologies & Tools</h3>
                     <ul>
-                        <li><strong>Backend:</strong> Quarkus (Java) with Hibernate Panache for rapid development and high performance.</li>
-                        <li><strong>Frontend:</strong> React (Vite) for a dynamic, responsive, and modern user experience.</li>
-                        <li><strong>Database:</strong> MariaDB/MySQL for reliable data persistence.</li>
+                        <li><strong>Backend:</strong> Java 21+ with Quarkus Framework</li>
+                        <li><strong>Frontend:</strong> React 19 with Vite</li>
+                        <li><strong>Database:</strong> MySQL</li>
+                        <li><strong>Styling:</strong> Vanilla CSS (Modular)</li>
+                        <li><strong>Testing/API:</strong> Bruno - The Git-Native API Client</li>
                     </ul>
                 </div>
 

@@ -78,6 +78,29 @@ const ProductList = ({ onProduce }) => {
         }
     };
 
+    const [expandedRecipe, setExpandedRecipe] = useState(null);
+
+    const handleEditProduct = async (p) => {
+        const newName = prompt('New product name:', p.productName);
+        if (newName === null) return;
+        const newPrice = prompt('New product price:', p.productPrice);
+        if (newPrice === null || isNaN(newPrice)) return;
+
+        try {
+            await api.put(`/products/${p.id}`, {
+                productName: newName,
+                productPrice: parseFloat(newPrice)
+            });
+            fetchData();
+        } catch (err) {
+            alert('Error editing product.');
+        }
+    };
+
+    const toggleRecipe = (id) => {
+        setExpandedRecipe(expandedRecipe === id ? null : id);
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -109,20 +132,31 @@ const ProductList = ({ onProduce }) => {
                                 <td>{p.stockQuantity || 0}</td>
                                 <td>{p.maxProductionQuantity}</td>
                                 <td>
-                                    <div className="recipe-container">
-                                        <strong>Recipe:</strong>
-                                        {recipes.filter(r => r.product.id === p.id).map(r => (
-                                            <div key={r.id} className="recipe-item">
-                                                <span>• {r.material.materialName}: {r.quantity}</span>
-                                                <button onClick={() => handleDeleteRecipe(r.id)} className="btn-remove-recipe">x</button>
-                                            </div>
-                                        ))}
-                                    </div>
                                     <div className="action-buttons">
+                                        <button onClick={() => toggleRecipe(p.id)} className="btn-secondary">
+                                            {expandedRecipe === p.id ? 'Hide Recipe' : 'View Recipe'}
+                                        </button>
                                         <button onClick={() => handleProduce(p.id)}>Produce</button>
-                                        <button onClick={() => handleAddRecipe(p.id)} className="btn-secondary">+ Material</button>
+                                        <button onClick={() => handleAddRecipe(p.id)} className="btn-secondary">+ Mat</button>
+                                        <button onClick={() => handleEditProduct(p)} className="btn-edit">Edit</button>
                                         <button onClick={() => handleDeleteProduct(p.id)} className="btn-delete">Delete</button>
                                     </div>
+
+                                    {expandedRecipe === p.id && (
+                                        <div className="recipe-container" style={{ marginTop: '10px' }}>
+                                            <strong>Recipe Details:</strong>
+                                            {recipes.filter(r => r.product.id === p.id).length === 0 ? (
+                                                <p>No materials linked.</p>
+                                            ) : (
+                                                recipes.filter(r => r.product.id === p.id).map(r => (
+                                                    <div key={r.id} className="recipe-item">
+                                                        <span>• {r.material.materialName}: {r.quantity}</span>
+                                                        <button onClick={() => handleDeleteRecipe(r.id)} className="btn-remove-recipe">x</button>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
+                                    )}
                                 </td>
                             </tr>
                         ))}

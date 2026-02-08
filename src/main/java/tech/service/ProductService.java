@@ -69,6 +69,7 @@ public class ProductService {
     @Transactional
     public void deleteProductById(UUID id) {
         var product = findById(id);
+        ProductRecipeEntity.delete("product", product);
         ProductEntity.deleteById(id);
 
     }

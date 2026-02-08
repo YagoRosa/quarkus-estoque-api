@@ -7,7 +7,7 @@ const MainLayout = ({ children }) => {
             <Sidebar />
             <main className="content">
                 <header className="top-header">
-                    <h1>Production Control - Autoflex Standard</h1>
+                    <h1>Control of Quantity and Production</h1>
                 </header>
                 <div className="page-content">
                     {children}

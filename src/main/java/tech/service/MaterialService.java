@@ -35,8 +35,10 @@ public class MaterialService {
         return material;
     }
 
+    @jakarta.transaction.Transactional
     public void deleteMaterialById(UUID id) {
         var material = findById(id);
+        tech.entity.ProductRecipeEntity.delete("material", material);
         MaterialEntity.deleteById(id);
 
     }

@@ -151,6 +151,10 @@ button.btn-secondary {
   background: #64748b;
 }
 
+button.btn-edit {
+  background: #f59e0b;
+}
+
 button.btn-remove-recipe {
   background: transparent;
   color: #ef4444;
@@ -181,7 +185,7 @@ button.btn-remove-recipe:hover {
 
 .action-buttons {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
