@@ -17,6 +17,33 @@ const MaterialList = () => {
         }
     };
 
+    const handleDelete = async (id) => {
+        if (!window.confirm('Tem certeza que deseja excluir este material?')) return;
+        try {
+            await api.delete(`/materials/${id}`);
+            fetchMaterials();
+        } catch (err) {
+            alert('Erro ao excluir: ' + (err.response?.data?.details || err.message));
+        }
+    };
+
+    const handleEdit = async (m) => {
+        const newName = prompt('Novo nome do material:', m.materialName);
+        if (newName === null) return;
+        const newQty = prompt('Nova quantidade em estoque:', m.stockQuantity);
+        if (newQty === null || isNaN(newQty)) return;
+
+        try {
+            await api.put(`/materials/${m.id}`, {
+                materialName: newName,
+                stockQuantity: parseInt(newQty)
+            });
+            fetchMaterials();
+        } catch (err) {
+            alert('Erro ao editar: ' + (err.response?.data?.details || err.message));
+        }
+    };
+
     useEffect(() => {
         fetchMaterials();
     }, []);
@@ -36,14 +63,19 @@ const MaterialList = () => {
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Estoque</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {materials.map((m) => (
                             <tr key={m.id}>
-                                <td>{m.id}</td>
+                                <td>{m.id.substring(0, 8)}...</td>
                                 <td>{m.materialName}</td>
                                 <td>{m.stockQuantity}</td>
+                                <td>
+                                    <button onClick={() => handleEdit(m)} style={{ marginRight: '5px' }}>Editar</button>
+                                    <button onClick={() => handleDelete(m.id)} style={{ color: 'red' }}>Excluir</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
