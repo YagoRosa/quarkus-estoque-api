@@ -24,7 +24,7 @@ const ProductList = ({ onProduce }) => {
         try {
             await api.post(`/products/${id}/produce?quantity=${quantity}`);
             alert('Produção realizada com sucesso!');
-            if (onProduce) onProduce(); // Dispara atualização global
+            if (onProduce) onProduce();
         } catch (err) {
             alert('Erro na produção: ' + (err.response?.data?.details || err.message));
         }
@@ -49,6 +49,7 @@ const ProductList = ({ onProduce }) => {
                             <th>Nome</th>
                             <th>Preço</th>
                             <th>Estoque Atual</th>
+                            <th>Pode Produzir</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -58,6 +59,7 @@ const ProductList = ({ onProduce }) => {
                                 <td>{p.productName}</td>
                                 <td>R$ {p.productPrice}</td>
                                 <td>{p.stockQuantity || 0}</td>
+                                <td>{p.maxProductionQuantity}</td>
                                 <td>
                                     <button onClick={() => handleProduce(p.id)}>Produzir</button>
                                 </td>

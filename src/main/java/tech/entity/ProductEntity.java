@@ -9,15 +9,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
-@Table (name = "product")
-public class ProductEntity extends PanacheEntityBase{
-   @Id
-   @GeneratedValue(strategy = GenerationType.UUID)
+@Table(name = "product")
+public class ProductEntity extends PanacheEntityBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
     public String productName;
     public BigDecimal productPrice;
-    public Integer stockQuantity; 
+    public Integer stockQuantity;
+
+    @Transient
+    public Integer maxProductionQuantity;
 
 }
