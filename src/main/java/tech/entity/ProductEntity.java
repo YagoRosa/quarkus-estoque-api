@@ -18,5 +18,6 @@ public class ProductEntity extends PanacheEntityBase{
     public UUID id;
     public String productName;
     public BigDecimal productPrice;
+    public Integer stockQuantity; 
 
 }

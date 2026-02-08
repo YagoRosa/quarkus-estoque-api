@@ -45,21 +45,21 @@ public class MaterialController {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateMaterial(@PathParam("id") UUID materialid, MaterialEntity materialEntity) {
-        return Response.ok(materialService.updateMaterial(materialid,materialEntity)).build();
+    public Response updateMaterial(@PathParam("id") UUID id, MaterialEntity materialEntity) {
+        return Response.ok(materialService.updateMaterial(id,materialEntity)).build();
     }
 
     @GET
     @Path("/{id}")
-    public Response getMaterialById(@PathParam("id") UUID materialid) {
-        return Response.ok(materialService.findById(materialid)).build();
+    public Response getMaterialById(@PathParam("id") UUID id) {
+        return Response.ok(materialService.findById(id)).build();
     }
 
     @DELETE
     @Transactional
     @Path("/{id}")
-    public Response deleteMaterialById(@PathParam("id") UUID materialid) {
-        materialService.deleteMaterialById(materialid);
+    public Response deleteMaterialById(@PathParam("id") UUID id) {
+        materialService.deleteMaterialById(id);
         return Response.noContent().build();
     }
 

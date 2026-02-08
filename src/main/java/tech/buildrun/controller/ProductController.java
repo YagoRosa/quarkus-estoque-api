@@ -45,23 +45,29 @@ public class ProductController {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateProduct(@PathParam("id") UUID productid, ProductEntity productEntity) {
-        return Response.ok(productService.updateProduct(productid,productEntity)).build();
+    public Response updateProduct(@PathParam("id") UUID id, ProductEntity productEntity) {
+        return Response.ok(productService.updateProduct(id,productEntity)).build();
     }
 
     @GET
     @Path("/{id}")
-    public Response getProductById(@PathParam("id") UUID productid) {
-        return Response.ok(productService.findById(productid)).build();
+    public Response getProductById(@PathParam("id") UUID id) {
+        return Response.ok(productService.findById(id)).build();
     }
 
     @DELETE
     @Transactional
     @Path("/{id}")
-    public Response deleteProductById(@PathParam("id") UUID productid) {
-        productService.deleteProductById(productid);
+    public Response deleteProductById(@PathParam("id") UUID id) {
+        productService.deleteProductById(id);
         return Response.noContent().build();
     }
 
+    @POST
+    @Path("/{id}/produce")
+    @Transactional
+    public Response produce(@PathParam("id") UUID productId, @QueryParam("quantity") Integer quantity) {
+        return Response.ok(productService.produceProduct(productId, quantity)).build();
+    }
 
 }   

@@ -1,0 +1,32 @@
+meta {
+  name: Produce
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/products/9622a1df-09e9-4da0-94b4-9c05f63653d4/produce?quantity=10
+  body: json
+  auth: inherit
+}
+
+params:query {
+  quantity: 10
+}
+
+body:json {
+  {
+    "product": {
+      "id": "9622a1df-09e9-4da0-94b4-9c05f63653d4"
+    },
+    "material": {
+      "id": "3910ff36-3254-41d8-a572-1bab4ddc411a"
+    },
+    "quantity": 5.0
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,19 +1,19 @@
 meta {
   name: Create
   type: http
-  seq: 1
+  seq: 3
 }
 
 post {
-  url: http://localhost:8080/products
+  url: http://localhost:8080/materials
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "materialName": "Teste333",
-    "stockQuantity": "22"
+    "materialName": "Madeira",
+    "stockQuantity": 1000
   }
 }
 

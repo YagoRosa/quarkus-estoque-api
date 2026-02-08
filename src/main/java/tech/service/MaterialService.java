@@ -19,13 +19,13 @@ public class MaterialService {
         return MaterialEntity.findAll().page(page, pagesize).list();
     }
 
-    public MaterialEntity findById(UUID materialid) {
-        return (MaterialEntity) MaterialEntity.findByIdOptional(materialid)
+    public MaterialEntity findById(UUID id) {
+        return (MaterialEntity) MaterialEntity.findByIdOptional(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    public MaterialEntity updateMaterial(UUID materialid, MaterialEntity materialEntity) {
-        var material = findById(materialid);
+    public MaterialEntity updateMaterial(UUID id, MaterialEntity materialEntity) {
+        var material = findById(id);
 
         material.materialName = materialEntity.materialName;
         material.stockQuantity = materialEntity.stockQuantity;
@@ -35,9 +35,9 @@ public class MaterialService {
         return material;
     }
 
-    public void deleteMaterialById(UUID materialid) {
-        var material = findById(materialid);
-        MaterialEntity.deleteById(materialid);
+    public void deleteMaterialById(UUID id) {
+        var material = findById(id);
+        MaterialEntity.deleteById(id);
 
     }
 
