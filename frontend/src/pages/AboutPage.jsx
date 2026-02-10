@@ -2,57 +2,92 @@ import React from 'react';
 
 const AboutPage = () => {
     return (
-        <div className="page-container">
-            <h2>About CQP System (Control of Quantity and Production)</h2>
+        <div className="page-container about-page">
+            <div className="about-header">
+                <div className="title-row">
+                    <h2>About CQP System</h2>
+                    <span className="developed-by-badge">by Yago Rosa</span>
+                </div>
+                <p className="system-subtitle">Control of Quantity and Production • v1.0.0</p>
+            </div>
 
-            <div className="dashboard-grid">
-                <div className="stat-card">
+            <div className="bento-grid">
+                {/* Hero Section - Purpose */}
+                <div className="bento-item bento-hero">
+                    <div className="bento-icon">🎯</div>
                     <h3>Project Purpose</h3>
                     <p>
-                        The CQP System (Control of Quantity and Production) was developed to provide a robust solution
-                        for Small and Medium Enterprises (SMEs) to manage their material stocks and production lines efficiently.
+                        The CQP System was developed as a comprehensive practical assessment to demonstrate expertise
+                        in full-stack development and modern architectures. It provides a robust solution for
+                        Small and Medium Enterprises (SMEs) to manage material stocks and production lines
+                        with precision, speed, and real-time intelligence. This project reflects a commitment
+                        to technical excellence—from backend logic to premium UI/UX experiences.
                     </p>
                 </div>
 
-                <div className="stat-card">
-                    <h3>Technologies & Tools</h3>
-                    <ul>
-                        <li><strong>Backend:</strong> Java 21+ with Quarkus Framework</li>
-                        <li><strong>Frontend:</strong> React 19 with Vite</li>
-                        <li><strong>Database:</strong> MySQL</li>
-                        <li><strong>Styling:</strong> Vanilla CSS (Modular)</li>
-                        <li><strong>Testing/API:</strong> Bruno - The Git-Native API Client</li>
-                    </ul>
+                {/* Tech Stack - Specs */}
+                <div className="bento-item bento-specs">
+                    <div className="bento-icon">⚙️</div>
+                    <h3>System Stack</h3>
+                    <div className="tech-tags">
+                        <span className="tech-tag">Java 21</span>
+                        <span className="tech-tag">Quarkus</span>
+                        <span className="tech-tag">React 19</span>
+                        <span className="tech-tag">MySQL 8</span>
+                        <span className="tech-tag">Vite</span>
+                        <span className="tech-tag">Bruno API</span>
+                    </div>
                 </div>
 
-                <div className="stat-card">
-                    <h3>Development Stages</h3>
-                    <ol>
-                        <li><strong>Foundations:</strong> Implementation of Material and Product CRUDs.</li>
-                        <li><strong>Intelligence:</strong> Development of backend logic for Production Capacity (RF008).</li>
-                        <li><strong>Recipe Management:</strong> Linking materials to products with granular control (RF007).</li>
-                        <li><strong>Modern Layout:</strong> Multi-page routing and premium sidebar design (RF009).</li>
-                        <li><strong>Responsiveness:</strong> Full compliance with mobile-first standards (RNF003).</li>
-                        <li><strong>Internationalization:</strong> 100% English codebase and UI (RNF007).</li>
-                    </ol>
+                {/* Stages List */}
+                <div className="bento-item bento-roadmap">
+                    <div className="bento-icon">🚀</div>
+                    <h3>Development Roadmap</h3>
+                    <div className="roadmap-list">
+                        <div className="roadmap-item active">
+                            <span className="roadmap-step">01</span>
+                            <div className="roadmap-content">
+                                <strong>Foundations</strong>
+                                <p>Core CRUDs for Materials & Products</p>
+                            </div>
+                        </div>
+                        <div className="roadmap-item active">
+                            <span className="roadmap-step">02</span>
+                            <div className="roadmap-content">
+                                <strong>Intelligence</strong>
+                                <p>Backend Logic for Production Capacity (RF008)</p>
+                            </div>
+                        </div>
+                        <div className="roadmap-item active">
+                            <span className="roadmap-step">03</span>
+                            <div className="roadmap-content">
+                                <strong>Recipe Engine</strong>
+                                <p>Granular Material-Product Linking (RF007)</p>
+                            </div>
+                        </div>
+                        <div className="roadmap-item active">
+                            <span className="roadmap-step">04</span>
+                            <div className="roadmap-content">
+                                <strong>Modern UI</strong>
+                                <p>Premium Sidebar & Glassmorphism Refactor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Extra Stats/Info card */}
+                <div className="bento-item bento-small">
+                    <div className="bento-icon">📱</div>
+                    <h3>Responsiveness</h3>
+                    <p>100% Mobile-First compliance ensured across all modules.</p>
+                </div>
+
+                <div className="bento-item bento-small">
+                    <div className="bento-icon">🌍</div>
+                    <h3>Localization</h3>
+                    <p>Full English codebase and UI for international standards.</p>
                 </div>
             </div>
-
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                .stat-card ul, .stat-card ol {
-                    text-align: left;
-                    margin-top: 1rem;
-                    padding-left: 1.5rem;
-                }
-                .stat-card li {
-                    margin-bottom: 0.5rem;
-                    color: var(--text-muted);
-                }
-                .stat-card strong {
-                    color: var(--accent);
-                }
-            ` }} />
         </div>
     );
 };

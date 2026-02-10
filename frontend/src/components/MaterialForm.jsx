@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api/api';
+import { toastUtils as toast } from '../utils/toast';
 
 const MaterialForm = ({ onMaterialCreated }) => {
     const [name, setName] = useState('');
@@ -12,12 +13,12 @@ const MaterialForm = ({ onMaterialCreated }) => {
                 materialName: name,
                 stockQuantity: parseInt(quantity)
             });
-            alert('Material created successfully!');
+            toast.success('Material created successfully!');
             setName('');
             setQuantity('');
             if (onMaterialCreated) onMaterialCreated();
         } catch (err) {
-            alert('Error creating material.');
+            toast.error('Error creating material.');
         }
     };
 

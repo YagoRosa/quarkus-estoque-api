@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
+import ToastContainer from './components/layout/ToastContainer';
 import DashboardPage from './pages/DashboardPage';
 import MaterialsPage from './pages/MaterialsPage';
 import ProductsPage from './pages/ProductsPage';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
         </Routes>
       </MainLayout>
+      <ToastContainer />
     </Router>
   );
 }
