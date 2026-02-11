@@ -69,13 +69,3 @@ npm install
 npm run dev
 ```
 O sistema estará disponível em `http://localhost:5173`.
-
----
-
-## 👨‍💻 Desenvolvedor
-
-**Yago Rosa**
-*Focado em criar soluções que unem lógica de backend sólida com experiências de frontend surpreendentes.*
-
----
-*CQP System v1.0.0 - Control of Quantity and Production*
