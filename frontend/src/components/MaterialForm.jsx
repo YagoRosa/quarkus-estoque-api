@@ -38,6 +38,7 @@ const MaterialForm = ({ onMaterialCreated }) => {
                     placeholder="Initial Quantity"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
+                    min="0"
                     required
                 />
                 <button type="submit">Register</button>

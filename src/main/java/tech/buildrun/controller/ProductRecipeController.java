@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.Response;
 import tech.entity.ProductRecipeEntity;
 import tech.service.ProductRecipeService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Path("/recipes")
 @Produces("application/json")
@@ -20,8 +21,9 @@ public class ProductRecipeController {
     }
 
     @POST
-    public Response create(ProductRecipeEntity recipe) {
-        return Response.status(201).entity(service.addRecipe(recipe)).build();
+    @Transactional
+    public Response createRecipe(@Valid ProductRecipeEntity productRecipeEntity) {
+        return Response.status(201).entity(service.addRecipe(productRecipeEntity)).build();
     }
 
     @GET

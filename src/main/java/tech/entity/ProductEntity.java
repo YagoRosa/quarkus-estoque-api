@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "product")
@@ -18,7 +19,9 @@ public class ProductEntity extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
     public String productName;
+    @Min(0)
     public BigDecimal productPrice;
+    @Min(0)
     public Integer stockQuantity;
 
     @Transient

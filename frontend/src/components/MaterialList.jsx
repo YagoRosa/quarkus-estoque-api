@@ -133,6 +133,7 @@ const MaterialList = () => {
                             placeholder="Stock"
                             value={editQty}
                             onChange={(e) => setEditQty(e.target.value)}
+                            min="0"
                             style={{ width: '100px' }}
                         />
                         <button onClick={submitEdit} className="btn-save">Save</button>

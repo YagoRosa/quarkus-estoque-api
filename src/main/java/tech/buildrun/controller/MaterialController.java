@@ -3,6 +3,7 @@ package tech.buildrun.controller;
 import java.util.UUID;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -30,23 +31,23 @@ public class MaterialController {
 
     @GET
     public Response findAll(@QueryParam("page") @DefaultValue("0") Integer page,
-                            @QueryParam("pagesize") @DefaultValue("10") Integer pagesize) {
+            @QueryParam("pagesize") @DefaultValue("10") Integer pagesize) {
         var materials = materialService.findAll(page, pagesize);
-        
+
         return Response.ok(materials).build();
     }
-    
+
     @POST
     @Transactional
-    public Response createMaterial(MaterialEntity materialEntity) {
+    public Response createMaterial(@Valid MaterialEntity materialEntity) {
         return Response.ok(materialService.createMaterial(materialEntity)).build();
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateMaterial(@PathParam("id") UUID id, MaterialEntity materialEntity) {
-        return Response.ok(materialService.updateMaterial(id,materialEntity)).build();
+    public Response updateMaterial(@PathParam("id") UUID id, @Valid MaterialEntity materialEntity) {
+        return Response.ok(materialService.updateMaterial(id, materialEntity)).build();
     }
 
     @GET
@@ -63,5 +64,4 @@ public class MaterialController {
         return Response.noContent().build();
     }
 
-
-}   
+}

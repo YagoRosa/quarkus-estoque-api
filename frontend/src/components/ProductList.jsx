@@ -211,6 +211,7 @@ const ProductList = ({ onProduce }) => {
                                                     placeholder="Qty"
                                                     value={produceQty}
                                                     onChange={(e) => setProduceQty(e.target.value)}
+                                                    min="1"
                                                     style={{ width: '100px' }}
                                                 />
                                                 <button onClick={() => submitProduce(p.id)} className="btn-info">Start</button>
@@ -234,6 +235,8 @@ const ProductList = ({ onProduce }) => {
                                                     placeholder="Price"
                                                     value={editProdPrice}
                                                     onChange={(e) => setEditProdPrice(e.target.value)}
+                                                    min="0"
+                                                    step="0.01"
                                                     style={{ width: '100px' }}
                                                 />
                                                 <button onClick={submitEditProduct} className="btn-save">Save</button>
@@ -260,6 +263,8 @@ const ProductList = ({ onProduce }) => {
                                                     placeholder="Qty"
                                                     value={addQuantity}
                                                     onChange={(e) => setAddQuantity(e.target.value)}
+                                                    min="0.01"
+                                                    step="0.01"
                                                     style={{ width: '80px', marginRight: '0' }}
                                                 />
                                                 <button onClick={() => submitAddMaterial(p.id)} className="btn-save">Add</button>

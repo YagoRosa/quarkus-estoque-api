@@ -3,6 +3,8 @@ package tech.buildrun.controller;
 import java.util.UUID;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -30,23 +32,23 @@ public class ProductController {
 
     @GET
     public Response findAll(@QueryParam("page") @DefaultValue("0") Integer page,
-                            @QueryParam("pagesize") @DefaultValue("10") Integer pagesize) {
+            @QueryParam("pagesize") @DefaultValue("10") Integer pagesize) {
         var products = productService.findAll(page, pagesize);
-        
+
         return Response.ok(products).build();
     }
-    
+
     @POST
     @Transactional
-    public Response createProduct(ProductEntity productEntity) {
+    public Response createProduct(@Valid ProductEntity productEntity) {
         return Response.ok(productService.createProduct(productEntity)).build();
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateProduct(@PathParam("id") UUID id, ProductEntity productEntity) {
-        return Response.ok(productService.updateProduct(id,productEntity)).build();
+    public Response updateProduct(@PathParam("id") UUID id, @Valid ProductEntity productEntity) {
+        return Response.ok(productService.updateProduct(id, productEntity)).build();
     }
 
     @GET
@@ -66,8 +68,8 @@ public class ProductController {
     @POST
     @Path("/{id}/produce")
     @Transactional
-    public Response produce(@PathParam("id") UUID productId, @QueryParam("quantity") Integer quantity) {
+    public Response produce(@PathParam("id") UUID productId, @QueryParam("quantity") @Min(1) Integer quantity) {
         return Response.ok(productService.produceProduct(productId, quantity)).build();
     }
 
-}   
+}

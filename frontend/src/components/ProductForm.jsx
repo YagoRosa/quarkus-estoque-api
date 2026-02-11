@@ -92,6 +92,7 @@ const ProductForm = ({ onProductCreated }) => {
                                 placeholder="0.00"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
+                                min="0"
                                 required
                             />
                         </div>
@@ -126,6 +127,8 @@ const ProductForm = ({ onProductCreated }) => {
                                         placeholder="Qty"
                                         value={item.quantity}
                                         onChange={(e) => updateIngredient(index, 'quantity', e.target.value)}
+                                        min="0.01"
+                                        step="0.01"
                                         required
                                         style={{ width: '70px' }}
                                     />
